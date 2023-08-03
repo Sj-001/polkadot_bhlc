@@ -8,12 +8,14 @@ const client = new PolkadotLightClient(10);
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/getBlockByHash/:blockHash', (req, res) => {
-    res.send(client.queryByHash(req.params.blockHash))
+app.get('/getBlockByHash/:blockHash', async (req, res) => {
+    const block = await client.queryByHash(req.params.blockHash)
+    res.send(block)
 })
 
-app.get('/getBlockByNumber/:blockNumber', (req, res) => {
-    res.send(client.queryByBlockNumber(Number(req.params.blockNumber)))
+app.get('/getBlockByNumber/:blockNumber', async (req, res) => {
+    const block = await client.queryByBlockNumber(Number(req.params.blockNumber))
+    res.send(block)
 })
 app.get('/proof/:blockHash', (req, res) => res.json(client.generateProof(req.params.blockHash)))
 

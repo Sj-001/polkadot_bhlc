@@ -54,18 +54,22 @@ class PolkadotLightClient {
     });
   }
 
-  queryByBlockNumber(number: number): BlockData | undefined {
-    return this.headers.find((h) => h.number === number);
+  async queryByBlockNumber(number: number): Promise<BlockData | undefined> {
+    const blockHash = await this.api.rpc.chain.getBlockHash(number);
+    const signedBlock: any = await this.api.rpc.chain.getBlock(blockHash);
+    const header: Header = signedBlock.block.header
+    return {number, hash: blockHash.toString(), header: header}
   }
 
-  queryByHash(hash: string): BlockData | undefined {
-    return this.headers.find((h) => h.hash === hash);
+  async queryByHash(hash: string): Promise<BlockData | undefined> {
+    const signedBlock: any = await this.api.rpc.chain.getBlock(hash);
+    const header: Header = signedBlock.block.header
+    return {number: Number(header.number), hash, header: header}
   }
 
   generateProof(hash: string): any | undefined {
     for (const { tree } of this.trees) {
       const proof = tree.getProof(SHA256(hash).toString());
-
       if (proof.length) {
         return proof;
       }
