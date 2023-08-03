@@ -1,0 +1,28 @@
+{
+  "name": "polkadot_client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/api": "^10.9.1",
+    "body-parser": "^1.20.2",
+    "crypto-js": "^4.1.1",
+    "express": "^4.18.2",
+    "merkletreejs": "^0.3.10",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.6"
+  }
+}
